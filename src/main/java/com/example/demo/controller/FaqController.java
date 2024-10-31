@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import java.io.IOException;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -153,4 +152,14 @@ public class FaqController {
 
         return "usr/faq/list";
     }
+
+    // 질문에 대한 답변 작성 페이지 (관리자)
+    @RequestMapping("/adm/faq/answer")
+    public String showAnswerPage(HttpServletRequest req, Model model, int id) {
+        Article article = faqService.getForPrintArticle(rq.getLoginedMemberId(), id);
+        model.addAttribute("article", article);
+        return "adm/faq/answer";
+    }
+
+   
 }
