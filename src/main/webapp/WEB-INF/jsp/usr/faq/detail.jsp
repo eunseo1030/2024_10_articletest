@@ -36,6 +36,20 @@
                     <th style="text-align: center;">Body</th>
                     <td style="text-align: center;">${article.body}</td>
                 </tr>
+                <!-- 답변 표시 -->
+                <tr>
+                    <th style="text-align: center;">Answer</th>
+                    <td style="text-align: center;">
+                        <c:choose>
+                            <c:when test="${not empty article.answer}">
+                                ${article.answer} <!-- 답변이 있는 경우 표시 -->
+                            </c:when>
+                            <c:otherwise>
+                                <span style="color: gray;">답변 대기 중</span> <!-- 답변이 없는 경우 표시 -->
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                </tr>
             </tbody>
         </table>
 
@@ -51,6 +65,11 @@
             <c:if test="${article.userCanDelete }">
                 <a class="btn" href="../faq/doDelete?id=${article.id }" 
                    onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
+            </c:if>
+
+            <!-- 관리자 답변 추가 버튼 -->
+            <c:if test="${user.isAdmin}">
+                <a class="btn" href="../faq/answer?id=${article.id }">답변 작성</a>
             </c:if>
         </div>
     </div>

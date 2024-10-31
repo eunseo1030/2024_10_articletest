@@ -117,4 +117,12 @@ public interface FaqRepository {
 
     @Select("SELECT LAST_INSERT_ID();")
     public int getLastInsertId();
+
+    // 관리자가 질문에 답변을 추가하는 메서드
+    @Update("""
+            UPDATE article
+            SET answer = #{answer}, updateDate = NOW()
+            WHERE id = #{id}
+            """)
+    public void addAnswerToArticle(int id, String answer);
 }
